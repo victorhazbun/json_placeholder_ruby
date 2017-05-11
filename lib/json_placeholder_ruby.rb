@@ -3,21 +3,25 @@ require "httparty"
 
 module JsonPlaceholderRuby
   include HTTParty
-  base_uri 'http://jsonplaceholder.typicode.com/posts'
+  base_uri "http://jsonplaceholder.typicode.com"
 
   def self.show(id)
-    get("/1")
+    get("/posts/#{id}")
   end
 
   def self.index
+    get("/posts")
   end
 
-  def self.create
+  def self.create(body={})
+    post("/posts", body: body)
   end
 
-  def self.update
+  def self.update(id, body={})
+    put("/posts/#{id}", body: body)
   end
 
-  def self.destroy
+  def self.destroy(id)
+    delete("/posts/#{id}")
   end
 end
